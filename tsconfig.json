@@ -22,7 +22,7 @@
     "**/*.tsx",
     "components/Header.js",
     "pages/index.js",
-    "database/connect.js",
+    "database/connect.ts",
     "components/Layout.js"
   ],
   "exclude": ["node_modules"]

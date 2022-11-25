@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Layout from '../components/Layout';
+import NewsLetter from '../components/NewsLetter';
 import { getProducts } from '../database/connect';
 import grünStringer from '../public/1-Green Fitness Stringer.jpg';
 import rosa from '../public/2-Pink Water Bottle.jpg';
@@ -10,7 +11,7 @@ import grünJogger from '../public/3-Green Joggers.jpg';
 import blauJogger from '../public/4-Blue Joggers.jpg';
 import weißShirt from '../public/5-White Performance Shirt.jpg';
 import grauBag from '../public/6-Grey Bag.jpg';
-import heroimage from '../public/heroImage.jpg';
+import heroImage from '../public/heroImage.jpg';
 
 const bodyStyles = css`
   margin-left: 60px;
@@ -36,16 +37,38 @@ const item6 = css``;
 
 const row = css``;
 const column = css``;
-const heroImage = css``;
 const heroText = css`
   text-align: center;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
 `;
-export default function Home() {
+
+// ab hier shopCategory
+const products = css`
+  margin-bottom: 40px;
+`;
+const gridContainer = css`
+  /* display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); */
+  display: flex;
+  flex-wrap: wrap;
+`;
+const productStyles = css`
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  /* flex: 2 1 auto; */
+`;
+const productImage = css``;
+const productInfo = css`
+  text-align: center;
+`;
+export default function Home(props) {
   return (
     <>
       <Head>
@@ -65,25 +88,95 @@ export default function Home() {
               margin-top: 40px;
               display: grid;
               justify-content: center;
+              border: 1px solid black;
+              background-color: aliceblue;
             `}
           >
             <Image
-              src={'/heroImage.jpg'}
+              src={heroImage}
               alt=""
-              width={400}
-              height={400}
-              /* fill */
-              style={{ objectFit: 'cover', opacity: 0.5 }}
+              width={800}
+              height={800}
+              css={css`
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;
+              `}
             />
           </div>
           <div css={heroText} className="heroText">
-            <h1>I am John Doe</h1>
-            <p>And I'm a Photographer</p>
-            <button>Hire me</button>
+            <h1
+              css={css`
+                margin-bottom: 20px;
+              `}
+            >
+              Today is your opportunity to build the tomorrow you want
+            </h1>
+            <Link href="/shopCategory">
+              <button className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  Shop now
+                </span>
+              </button>
+            </Link>
           </div>
         </div>
 
-        <section css={grid}>
+        <div css={products}>
+          <h1
+            css={css`
+              text-align: center;
+              margin-top: 35px;
+              font-size: 50px;
+              font-weight: 700;
+            `}
+          >
+            New Arrivals
+          </h1>
+          <div css={gridContainer}>
+            {props.products.map((product) => {
+              return (
+                <div key={`product-${product.id}`} css={productStyles}>
+                  <div /* className={productImage} */>
+                    <Link href={`/${product.id}`}>
+                      <Image
+                        src={`/${product.id}-${product.name.toLowerCase()}.jpg`}
+                        /* src="/1-greenstringer.jpg" */
+                        css={productImage}
+                        alt=""
+                        width="300"
+                        height="300"
+                      />
+                    </Link>
+                  </div>
+                  <div css={productInfo}>
+                    <h2>{product.name}</h2>
+                    <div
+                      css={css`
+                        color: red;
+                      `}
+                    >
+                      {product.price}
+                    </div>
+                    <div>
+                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full m-2">
+                        Button
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <NewsLetter />
+        {/* <section css={grid}>
+          <div>
+            <h1>New Arrivals</h1>
+          </div>
+
           <div css={[item, item1]}>
             <figure>
               <Image src={grünStringer} alt="guy with green muscleshirt" />
@@ -152,98 +245,7 @@ export default function Home() {
               <p>17.95€</p>
             </div>
           </div>
-        </section>
-
-        <section css={grid}>
-          <div css={[item, item11]}>
-            <figure>
-              <Image src={grünStringer} alt="guy with green muscleshirt" />
-            </figure>
-            <div>
-              <p>Green Fitness Stringer</p>
-            </div>
-            <div>
-              <p>17.95€</p>
-            </div>
-          </div>
-          <div css={[item, item22]}>
-            <figure>
-              <Image src={rosa} alt="lady with pink water bottle" />
-            </figure>
-            <div>
-              <p>Pink Water Bottle</p>
-            </div>
-            <div>
-              <p>17.95€</p>
-            </div>
-          </div>
-          <div css={[item, item3]}>
-            <figure>
-              <Image src={grünJogger} alt="guy with green Joggers" />
-            </figure>
-            <div>
-              <p>Green Joggers</p>
-            </div>
-            <div>
-              <p>17.95€</p>
-            </div>
-          </div>
-
-          <div css={[item, item4]}>
-            <figure>
-              <Image src={blauJogger} alt="guy with blue joggers" />
-            </figure>
-            <div>
-              <p>Blue Joggers</p>
-            </div>
-            <div>
-              <p>17.95€</p>
-            </div>
-          </div>
-          <div css={[item, item5]}>
-            <figure>
-              <Image src={weißShirt} alt="guy with white performance shirt" />
-            </figure>
-
-            <div>
-              <p>White Performance Shirt</p>
-            </div>
-            <div>
-              <p>17.95€</p>
-            </div>
-          </div>
-          <div css={[item, item6]}>
-            <figure>
-              <Image src={grauBag} alt="guy with grey bag" />
-            </figure>
-            <div>
-              <p>Grey Bag</p>
-            </div>
-            <div>
-              <p>17.95€</p>
-            </div>
-          </div>
-        </section>
-
-        {/* <!-- Basic HTML Form --> */}
-        <form action="/send-data-here" method="post">
-          <label for="first">First name:</label>
-          <input type="text" id="first" name="first" />
-          <label for="last">Last name:</label>
-          <input type="text" id="last" name="last" />
-          <button type="submit">Submit</button>
-        </form>
-
-        <section css={row}>
-          <div css={column}>
-            <Image src={grünStringer} alt="guy with green muscleshirt" />
-            <Image src={rosa} alt="lady with pink water bottle" />
-            <Image src={grünJogger} alt="guy with green Joggers" />
-            <Image src={blauJogger} alt="guy with blue joggers" />
-            <Image src={weißShirt} alt="guy with white performance shirt" />
-            <Image src={grauBag} alt="guy with grey bag" />
-          </div>
-        </section>
+        </section> */}
       </div>
     </>
   );

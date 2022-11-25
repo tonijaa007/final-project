@@ -86,18 +86,18 @@ export default function Header(props) {
           </a>
           <nav css={leftSection}>
             <ul css={unOrderedStyles}>
-              <li css={listStyles}>
+              {/* <li css={listStyles}>
                 <a href="arrival">NEW ARRIVAL</a>
-              </li>
+              </li> */}
               <li css={listStyles}>
-                <a href="shopCategory">SHOP BY CATEGORY</a>
+                <a href="shopCategory"> SHOP</a>
               </li>
               <li css={listStyles}>
                 <Link href="private-profile">Private-Profile</Link>
               </li>
-              <li css={listStyles}>
+              {/* <li css={listStyles}>
                 <a href="women">WOMEN</a>
-              </li>
+              </li> */}
               <li css={listStyles}>
                 <a href="children">CHILDREN</a>
               </li>

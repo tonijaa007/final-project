@@ -14,26 +14,32 @@ export const sql = postgres({
   },
 });
 
+export type Product = {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+};
 /* const products = sql`
   SELECT * FROM products;
 `; */
 
 export async function getProducts() {
-  const products = await sql`
+  const products = await sql<[Product][]>`
   SELECT * FROM products;
 `;
   return products;
 }
 
-export async function getProductById(id) {
-  const products = await sql`
+export async function getProductById(id: number) {
+  const [product] = await sql<[Product]>`
     SELECT * FROM products WHERE id = ${id}
   `;
 
-  return products[0];
+  return product;
 }
-/* console.log('products', products);
+// console.log('products', products);
 
-export function tryConnect() {
+/* export function tryConnect() {
   console.log('connect');
 } */
