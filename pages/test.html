@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      img {
+        width: 400px;
+        height: 400px;
+        border-radius: 100px;
+      }
+      .grid {
+        display: block;
+
+        @media (min-width: 768px) {
+          display: grid;
+          grid-gap: 16px;
+          grid-template-columns: 1fr 2fr 1fr 1fr;
+        }
+      }
+      .card {
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+      <!-- <div>
+        <img src="./images/1.jpg" alt="guy with muscleshirt" />
+      </div> -->
+      <div class="card">
+        <h3>1</h3>
+      </div>
+      <div class="card">
+        <h3>2</h3>
+      </div>
+      <div class="card">
+        <h3>3</h3>
+      </div>
+      <div class="card">
+        <h3>4</h3>
+      </div>
+      <div class="card">
+        <h3>5</h3>
+      </div>
+      <div class="card">
+        <h3>6</h3>
+      </div>
+    </div>
+  </body>
+</html>
