@@ -29,7 +29,7 @@ export default function UserProfile(props: Props) {
       <h1>Personal Information</h1>
       id: {props.user.id} username: {props.user.username}
       <hr />
-      THIS IS NOT FUNCTIONAL BUT AN EXAMPLE
+      {/* THIS IS NOT FUNCTIONAL BUT AN EXAMPLE */}
       <br />
       <button>Delete User</button>
     </>

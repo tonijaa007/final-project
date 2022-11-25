@@ -98,18 +98,18 @@ export default function Header(props) {
               {/* <li css={listStyles}>
                 <a href="women">WOMEN</a>
               </li> */}
-              <li css={listStyles}>
+              {/* <li css={listStyles}>
                 <a href="children">CHILDREN</a>
-              </li>
+              </li> */}
             </ul>
           </nav>
         </div>
-        <form css={middleSection}>
+        {/* <form css={middleSection}>
           <input css={inputStyle} placeholder="Search" />
           <button css={searchStyle}>
             <Image src={Search} alt="search icon" width={30} height={25} />
           </button>
-        </form>
+        </form> */}
         <nav css={rightSection}>
           <ul css={unorderedStyles2}>
             {props.user && props.user.username}
